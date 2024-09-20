@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI Timer Example</title>
+    <script>
+        // Initialize variables for the timer
+        let timer;
+        let running = false;
+        let seconds = 0, minutes = 0, hours = 0;
+
+        // Function to format time
+        function formatTime(num) {
+            return num < 10 ? "0" + num : num;
+        }
+
+        // Function to update the timer display
+        function updateTimerDisplay() {
+            document.getElementById("timer").textContent = 
+                formatTime(hours) + ":" + formatTime(minutes) + ":" + formatTime(seconds);
+        }
+
+        // Function to start the timer
+        function startTimer() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    seconds++;
+                    if (seconds === 60) {
+                        seconds = 0;
+                        minutes++;
+                    }
+                    if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                    updateTimerDisplay();
+                }, 1000);
+            }
+        }
+
+        // Function to stop the timer
+        function stopTimer() {
+            clearInterval(timer);
+            running = false;
+        }
+
+        // Function to reset the timer
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            updateTimerDisplay();
+        }
+
+        // Run the initial display as 00:00:00
+        window.onload = function() {
+            updateTimerDisplay();
+        };
+    </script>
+</head>
+<body>
+    <h1>Welcome to FastAPI Timer Example</h1>
+    <p>{{ message }}</p>
+    <p>Timer: <span id="timer">00:00:00</span></p>
+    
+    <!-- Buttons to control the timer -->
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+</body>
+</html>
