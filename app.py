@@ -22,7 +22,6 @@ async def read_root(request: Request):
     request_logger = logging.getLogger(__file__)
     request_logger.info("Request received")
 
-
     log_message = "Request received at: %s" % "12:00 PM"
 
     result = ( 1 + 2 )
